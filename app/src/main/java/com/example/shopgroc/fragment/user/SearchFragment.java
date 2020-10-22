@@ -25,7 +25,7 @@ import java.util.List;
 
 
 /**
- * @author Abdul Rehman
+ * @author Saqib Javed
  */
 public class SearchFragment extends Fragment implements View.OnClickListener, SearchItemAdapter.ProductClickListener,ChildToParentCallback {
     ChildToParentCallback varChildToParentCallback;

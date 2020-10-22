@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 /**
- * @author Abdul Rehman
+ * @author Saqib Javed
  */
 public class StoreLoginFragment extends Fragment implements View.OnClickListener {
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
     BottomNavigationView riderBottomNavigation;
     NavController navController;
     NavController navControllerStore;
+    NavController navControllerRider;
     SharedUtility sharedUtility;
     TextView textViewCount;
     int mCartItemCount = 10;
@@ -55,8 +57,10 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
 
         navController= Navigation.findNavController(this,R.id.nav_host_fragment);
         navControllerStore= Navigation.findNavController(this,R.id.nav_host_fragment);
+        navControllerRider= Navigation.findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigation, navController);
         NavigationUI.setupWithNavController(storeBottomNavigation, navControllerStore);
+        NavigationUI.setupWithNavController(riderBottomNavigation, navControllerRider);
 
         if (sharedUtility.isLoggedIn()){
 
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
         super.onBackPressed();
         hideBottomNavigation();
         hideStoreBottomNavigation();
+        hideRiderBottomNavigation();
         Log.i(TAG, "onBackPressed: " + "current location Id" + navController.getCurrentDestination().getId() + "navigation search id" + R.id.navigation_dashboard);
         if(navController.getCurrentDestination().getId() == R.id.itemDisplayFragment ){
             finish();
@@ -106,8 +111,30 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
             storeBottomNavigation.setVisibility(GONE);
         }
     }
+    private void hideRiderBottomNavigation() {
+        if(navControllerRider.getCurrentDestination().getId() == R.id.rider_navigation_more ||
+                navControllerRider.getCurrentDestination().getId() == R.id.rider_navigation_request){
+            riderBottomNavigation.setVisibility(VISIBLE);
+        }
+        else {
+            riderBottomNavigation.setVisibility(GONE);
+        }
+    }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("MyString", "Welcome back to Android");
+        // etc.
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
+        double myDouble = savedInstanceState.getDouble("myDouble");
+        int myInt = savedInstanceState.getInt("MyInt");
+        String myString = savedInstanceState.getString("MyString");
+    }
 
     @Override
     public void hideBottomNav(boolean hide) {
@@ -139,5 +166,27 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
         }else {
             Log.i(TAG,"textViewCount is null");
         }
+    }
+
+    public void raheemstorebtn(View view) {
+        CharSequence text = "Welcome to Raheem Store";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+        toast.show();
+
+    }
+    public void alfatehstorebtn(View view) {
+        CharSequence text = "Coming Soon";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+        toast.show();
+
+    }
+    public void estorebtn(View view) {
+        CharSequence text = "Coming Soon";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+        toast.show();
+
     }
 }
